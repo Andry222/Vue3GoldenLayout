@@ -1,5 +1,9 @@
 <template>
-    <div class="full-height">
+  <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </div>
+  <div class="full-height">
         <div id="nav" style="height: 150px">
             <h1 style="margin: 0">Golden Layout Demo</h1>
             <button @click="onClickInitLayoutMinRow">Init Layout MinRow</button>
@@ -16,8 +20,12 @@
             <div style="width: 20px; display: inline-block"></div>
             <button @click="onClickSaveLayout">Save Layout</button>
             <div style="width: 20px; display: inline-block"></div>
-            <button @click="onClickLoadLayout">Load Layout</button><br><br>
-            <div style="width: 95px; display: inline-block;"><button>"Boton personalizado"</button></div>
+            <button @click="onClickLoadLayout">Load Layout</button><br>
+            <div style="width: 395px; display: inline-block;"></div><br>
+                <button @click="funcionPrueba1">"crear ventana blanca"</button>
+                <button @click="funcionPrueba2">"crear ventana verde"</button>
+            
+
         </div>
         
         <glayout
@@ -26,6 +34,7 @@
             style="width: 100%; height: calc(100% - 90px)"
         ></glayout>
     </div>
+  <router-view/>
 </template>
 
 <script setup lang="ts">
@@ -42,7 +51,7 @@ const onClickInitLayoutMinRow = () => {
 
 const onClickAddGLComponent1 = () => {
     if (!GLayoutRoot.value) return;
-    GLayoutRoot.value.addGLComponent("Content1", "Title siuuuu");
+    GLayoutRoot.value.addGLComponent("Content1", "Title 1");
 };
 
 const onClickAddGLComponent2 = () => {
@@ -67,6 +76,17 @@ const onClickLoadLayout = () => {
     if (!GLayoutRoot.value) return;
     const config = JSON.parse(str as string);
     GLayoutRoot.value.loadGLLayout(config);
+};
+
+const funcionPrueba1 = () => {
+    console.log("funcion prueba 1");
+    if (!GLayoutRoot.value) return;
+    GLayoutRoot.value.addGLComponent("ContenidoPrueba1", "color blanco");
+};
+const funcionPrueba2 = () => {
+    console.log("funcion prueba 2");
+    if (!GLayoutRoot.value) return;
+    GLayoutRoot.value.addGLComponent("ContenidoPrueba2", "color verde");
 };
 </script>
 
