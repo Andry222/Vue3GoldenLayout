@@ -1,94 +1,12 @@
-<template>
+<template id="app">
   <div id="nav">
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/about">About</router-link> |
+    <router-link to="/dashboard">Dashboard</router-link>
   </div>
-  <div class="full-height">
-        <div id="nav" style="height: 150px">
-            <h1 style="margin: 0">Golden Layout Demo</h1>
-            <button @click="onClickInitLayoutMinRow">Init Layout MinRow</button>
-            <div style="width: 95px; display: inline-block;"></div>
-            <button @click="onClickAddGLComponent1">
-                Add Simple Component
-            </button>
-            <button @click="onClickAddGLComponent2">
-                Add Widest Component
-            </button>
-            <button @click="onClickAddGLComponent3">
-                Add Highest Component
-            </button>
-            <div style="width: 20px; display: inline-block"></div>
-            <button @click="onClickSaveLayout">Save Layout</button>
-            <div style="width: 20px; display: inline-block"></div>
-            <button @click="onClickLoadLayout">Load Layout</button><br>
-            <div style="width: 395px; display: inline-block;"></div><br>
-                <button @click="funcionPrueba1">"crear ventana blanca"</button>
-                <button @click="funcionPrueba2">"crear ventana verde"</button>
-            
-
-        </div>
-        
-        <glayout
-            ref="GLayoutRoot"
-            glc-path="./"
-            style="width: 100%; height: calc(100% - 90px)"
-        ></glayout>
-    </div>
   <router-view/>
 </template>
 
-<script setup lang="ts">
-import Glayout from "@/components/Glayout.vue";
-import { ref } from "vue";
-import { prefinedLayouts } from "./ts/predefined-layouts";
-
-const GLayoutRoot = ref<null | HTMLElement>(null);
-
-const onClickInitLayoutMinRow = () => {
-    if (!GLayoutRoot.value) return;
-    GLayoutRoot.value.loadGLLayout(prefinedLayouts.miniRow);
-};
-
-const onClickAddGLComponent1 = () => {
-    if (!GLayoutRoot.value) return;
-    GLayoutRoot.value.addGLComponent("Content1", "Title 1");
-};
-
-const onClickAddGLComponent2 = () => {
-    if (!GLayoutRoot.value) return;
-    GLayoutRoot.value.addGLComponent("Content2", "I'm wide");
-};
-
-const onClickAddGLComponent3 = () => {
-    if (!GLayoutRoot.value) return;
-    GLayoutRoot.value.addGLComponent("Content3", "I'm high");
-};
-
-const onClickSaveLayout = () => {
-    if (!GLayoutRoot.value) return;
-    const config = GLayoutRoot.value.getLayoutConfig();
-    localStorage.setItem("gl_config", JSON.stringify(config));
-};
-
-const onClickLoadLayout = () => {
-    const str = localStorage.getItem("gl_config");
-    if (!str) return;
-    if (!GLayoutRoot.value) return;
-    const config = JSON.parse(str as string);
-    GLayoutRoot.value.loadGLLayout(config);
-};
-
-const funcionPrueba1 = () => {
-    console.log("funcion prueba 1");
-    if (!GLayoutRoot.value) return;
-    GLayoutRoot.value.addGLComponent("ContenidoPrueba1", "color blanco");
-};
-const funcionPrueba2 = () => {
-    console.log("funcion prueba 2");
-    if (!GLayoutRoot.value) return;
-    GLayoutRoot.value.addGLComponent("ContenidoPrueba2", "color verde");
-};
-</script>
 
 <style>
 html {
@@ -115,6 +33,3 @@ button{
 
 }
 </style>
-
-<style src="golden-layout/dist/css/goldenlayout-base.css"></style>
-<style src="golden-layout/dist/css/themes/goldenlayout-dark-theme.css"></style>
